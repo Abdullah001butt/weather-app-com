@@ -38,6 +38,36 @@ const Weather = ({ weatherData }) => {
     return `${hours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
   };
 
+  const getCurrentDate = () => {
+    if (!weatherData) return null;
+
+    const currentTimeUnix = weatherData.dt;
+    const currentTime = new Date(
+      (currentTimeUnix + weatherData.timezone) * 1000
+    );
+
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const month = months[currentTime.getMonth()];
+    const day = currentTime.getDate();
+    const year = currentTime.getFullYear();
+
+    return `${month} ${day}, ${year}`;
+  };
+
   return (
     <div className="max-w-2xl mx-auto bg-[#2F3847] rounded-lg shadow-md overflow-hidden sm:max-w-full sm:mx-4 my-4">
       {weatherData ? (
@@ -94,6 +124,12 @@ const Weather = ({ weatherData }) => {
                 <p className="text-[#FFFFFF]">Current Time :</p>
                 <p className="font-bold w-20 text-[#FFFFFF]">
                   {getCurrentTime()}
+                </p>
+              </div>
+              <div className="flex justify-between gap-x-4">
+                <p className="text-[#FFFFFF]">Current Date :</p>
+                <p className="font-bold w-20 text-[#FFFFFF]">
+                  {getCurrentDate()}
                 </p>
               </div>
             </div>
