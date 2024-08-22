@@ -23,6 +23,21 @@ const Weather = ({ weatherData }) => {
     }
   };
 
+  const getCurrentTime = () => {
+    if (!weatherData) return null;
+
+    const timezoneOffset = weatherData.timezone;
+    const currentTimeUnix = weatherData.dt;
+    const currentTime = new Date((currentTimeUnix + timezoneOffset) * 1000);
+
+    let hours = currentTime.getHours();
+    let minutes = currentTime.getMinutes();
+    let ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12;
+
+    return `${hours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
+  };
+
   return (
     <div className="max-w-2xl mx-auto bg-[#2F3847] rounded-lg shadow-md overflow-hidden sm:max-w-full sm:mx-4 my-4">
       {weatherData ? (
@@ -73,6 +88,12 @@ const Weather = ({ weatherData }) => {
                   {weatherData.wind && weatherData.wind.speed
                     ? (weatherData.wind.speed * 3.6).toFixed(2) + " km/h"
                     : "Loading..."}
+                </p>
+              </div>
+              <div className="flex justify-between gap-x-4">
+                <p className="text-[#FFFFFF]">Current Time :</p>
+                <p className="font-bold w-20 text-[#FFFFFF]">
+                  {getCurrentTime()}
                 </p>
               </div>
             </div>
