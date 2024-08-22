@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 import Weather from "./components/Weather";
@@ -50,7 +50,7 @@ const App = () => {
       <div className="text-center p-4">
         <input
           type="text"
-          className="py-3 px-6 w-[700px] text-lg rounded-3xl border border-gray-200 text-white placeholder:text-gray-400 focus:outline-none"
+          className="py-3 px-6 w-full max-w-md text-lg rounded-3xl border border-gray-200 text-white placeholder:text-gray-400 focus:outline-none"
           placeholder="Search for cities..."
           required
           value={location}
@@ -88,7 +88,7 @@ const App = () => {
       {forecastError && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 shadow-md">
           <strong className="font-bold">Error!</strong>
-          <span>{error.message}</span>
+          <span>{forecastError.message}</span>
           <svg
             className="w-6 h-6 text-red-700 fill-current"
             xmlns="http://www.w3.org/2000/svg"
