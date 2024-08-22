@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Weather from "./components/Weather";
 import Forecast from "./components/Forecast";
+import RainLogo from "./components/RainLogo";
 
 const App = () => {
   const [location, setLocation] = useState("");
@@ -47,10 +48,12 @@ const App = () => {
 
   return (
     <div className="w-full h-full relative">
-      <div className="text-center p-4">
+      <div className="flex justify-between p-4">
+        <RainLogo />
         <input
           type="text"
-          className="py-3 px-6 w-full max-w-md text-lg rounded-3xl border border-gray-200 text-white placeholder:text-gray-400 focus:outline-none"
+          style={{ color: "#FFFFFF" }}
+          className="bg-[#2F3847] py-3 px-6 w-full max-w-md text-lg rounded-3xl border border-gray-200 placeholder:text-gray-400 focus:outline-none"
           placeholder="Search for cities..."
           required
           value={location}
